@@ -18,16 +18,16 @@ const VideoDetails = () => {
   const dispatch = useDispatch()
   const { token } = useSelector((state) => state.auth)
   const { courseSectionData, courseEntireData, completedLectures } =
-    useSelector((state) => state.viewCourse)
+    useSelector((state) => state.viewCourse);
 
-  const [videoData, setVideoData] = useState([])
+  const [videoData, setVideoData] = useState([]);
   const [previewSource, setPreviewSource] = useState("")
-  const [videoEnded, setVideoEnded] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [videoEnded, setVideoEnded] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     ;(async () => {
-      if (!courseSectionData.length) return
+      if (!courseSectionData.length) return ;
       if (!courseId && !sectionId && !subSectionId) {
         navigate(`/dashboard/enrolled-courses`)
       } else {
@@ -39,8 +39,8 @@ const VideoDetails = () => {
         const filteredVideoData = filteredData?.[0]?.subSection.filter(
           (data) => data._id === subSectionId
         )
-        // console.log("filteredVideoData", filteredVideoData)
-        setVideoData(filteredVideoData[0])
+        //console.log("filteredVideoData", filteredVideoData[0])
+        setVideoData(filteredVideoData[0]);
         setPreviewSource(courseEntireData.thumbnail)
         setVideoEnded(false)
       }
@@ -82,6 +82,7 @@ const VideoDetails = () => {
     // console.log("no of subsections", noOfSubsections)
 
     if (currentSubSectionIndx !== noOfSubsections - 1) {
+      //same section ki next video me ja rhe h
       const nextSubSectionId =
         courseSectionData[currentSectionIndx].subSection[
           currentSubSectionIndx + 1
@@ -90,6 +91,7 @@ const VideoDetails = () => {
         `/view-course/${courseId}/section/${sectionId}/sub-section/${nextSubSectionId}`
       )
     } else {
+      //different section ki first video
       const nextSectionId = courseSectionData[currentSectionIndx + 1]._id
       const nextSubSectionId =
         courseSectionData[currentSectionIndx + 1].subSection[0]._id

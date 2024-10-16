@@ -22,10 +22,12 @@ function Catalog() {
   useEffect(() => {
     ;(async () => {
       try {
-        const res = await apiConnector("GET", categories.CATEGORIES_API)
+        const res = await apiConnector("GET", categories.CATEGORIES_API);
+        //console.log(res);
         const category_id = res?.data?.data?.filter(
           (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
-        )[0]._id
+        )[0]._id;
+        //console.log("category id ",category_id);
         setCategoryId(category_id)
       } catch (error) {
         console.log("Could not fetch Categories.", error)

@@ -16,7 +16,7 @@ function Navbar() {
   const { token } = useSelector((state) => state.auth)
   const { user } = useSelector((state) => state.profile)
   const { totalItems } = useSelector((state) => state.cart)
-  const location = useLocation()
+  const location = useLocation();
 
   const [subLinks, setSubLinks] = useState([]);
   const [loading, setLoading] = useState(false)
@@ -43,16 +43,15 @@ function Navbar() {
     ;(async () => {
       setLoading(true)
       try {
-        const res = await apiConnector("GET", categories.CATEGORIES_API)
-        //console.log(res);
-        setSubLinks(res.data.data)
-        //console.log("result ",res.data.data);
+        const res = await apiConnector("GET", categories.CATEGORIES_API) 
+        setSubLinks(res.data.data) 
       } catch (error) {
         console.log("Could not fetch Categories.", error)
       }
-      setLoading(false)
+      setLoading(false);
     })()
-  }, [])
+  }, []);
+
 
   // console.log("sub links", subLinks)
 

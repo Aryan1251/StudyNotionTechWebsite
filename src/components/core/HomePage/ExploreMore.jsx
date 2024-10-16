@@ -21,6 +21,7 @@ const ExploreMore = () => {
   const setMyCards = (value) => {
     setCurrentTab(value);
     const result = HomePageExplore.filter((course) => course.tag === value);
+    // result wiil be an array of objects contain only one object
     setCourses(result[0].courses);
     setCurrentCard(result[0].courses[0].heading);
   };

@@ -18,8 +18,8 @@ import { apiConnector } from "../../services/apiConnector"
 import { ratingsEndpoints } from "../../services/apis"
 
 function ReviewSlider() {
-  const [reviews, setReviews] = useState([])
-  const truncateWords = 15
+  const [reviews, setReviews] = useState([]);
+  const truncateWords =15
 
   useEffect(() => {
     ;(async () => {
@@ -28,10 +28,10 @@ function ReviewSlider() {
         ratingsEndpoints.REVIEWS_DETAILS_API
       )
       if (data?.success) {
-        setReviews(data?.data)
+        setReviews(data?.data);
       }
     })()
-  }, [])
+  }, []);
 
   // console.log(reviews)
 
@@ -39,7 +39,7 @@ function ReviewSlider() {
     <div className="text-white">
       <div className="my-[50px] h-[184px] max-w-maxContentTab lg:max-w-maxContent">
         <Swiper
-          slidesPerView={4}
+          slidesPerView={2}
           spaceBetween={25}
           loop={true}
           freeMode={true}
@@ -104,4 +104,4 @@ function ReviewSlider() {
   )
 }
 
-export default ReviewSlider
+export default ReviewSlider;

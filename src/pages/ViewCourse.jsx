@@ -13,13 +13,13 @@ import {
 } from "../slices/viewCourseSlice"
 
 export default function ViewCourse() {
-  const { courseId } = useParams()
+  const { courseId } = useParams();
   const { token } = useSelector((state) => state.auth)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [reviewModal, setReviewModal] = useState(false)
 
   useEffect(() => {
-    ;(async () => {
+    const setCourseSpecificDetails=async () => {
       const courseData = await getFullDetailsOfCourse(courseId, token)
       // console.log("Course Data here... ", courseData.courseDetails)
       dispatch(setCourseSectionData(courseData.courseDetails.courseContent))
@@ -28,11 +28,12 @@ export default function ViewCourse() {
       let lectures = 0
       courseData?.courseDetails?.courseContent?.forEach((sec) => {
         lectures += sec.subSection.length
-      })
-      dispatch(setTotalNoOfLectures(lectures))
-    })()
+      });
+      dispatch(setTotalNoOfLectures(lectures));
+    }
+    setCourseSpecificDetails();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, []);
 
   return (
     <>

@@ -17,21 +17,21 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
     courseEntireData,
     totalNoOfLectures,
     completedLectures,
-  } = useSelector((state) => state.viewCourse)
+  } = useSelector((state) => state.viewCourse);
 
   useEffect(() => {
     ;(() => {
-      if (!courseSectionData.length) return
+      if (!courseSectionData.length) return ;
       const currentSectionIndx = courseSectionData.findIndex(
         (data) => data._id === sectionId
-      )
+      );
       const currentSubSectionIndx = courseSectionData?.[
         currentSectionIndx
       ]?.subSection.findIndex((data) => data._id === subSectionId)
       const activeSubSectionId =
         courseSectionData[currentSectionIndx]?.subSection?.[
           currentSubSectionIndx
-        ]?._id
+        ]?._id;
       setActiveStatus(courseSectionData?.[currentSectionIndx]?._id)
       setVideoBarActive(activeSubSectionId)
     })()
@@ -68,6 +68,7 @@ export default function VideoDetailsSidebar({ setReviewModal }) {
 
         <div className="h-[calc(100vh - 5rem)] overflow-y-auto">
           {courseSectionData.map((course, index) => (
+            //ye course section hai ek 
             <div
               className="mt-2 cursor-pointer text-sm text-richblack-5"
               onClick={() => setActiveStatus(course?._id)}
