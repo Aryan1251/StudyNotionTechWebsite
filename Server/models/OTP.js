@@ -38,7 +38,7 @@ async function sendVerificationEmail(email, otp) {
 	}
 }
 
-// Define a pre-save hook to send email after the document has been saved
+// Define a pre-save hook to send email before the document has been saved
 OTPSchema.pre("save", async function (next) {
 	console.log("New document saved to database");
 
@@ -47,6 +47,10 @@ OTPSchema.pre("save", async function (next) {
 		await sendVerificationEmail(this.email, this.otp);
 	}
 	next();
+	
+	// This schema would store a record of the OTP, the user’s email, and relevant timestamps in the database. 
+	// The middleware ensures that when a new OTP document is saved, an email with the OTP is sent to the user’s email address. 
+	// This setup is often used in systems that require two-factor authentication, password resets, or email verifications
 });
 
 const OTP = mongoose.model("OTP", OTPSchema);

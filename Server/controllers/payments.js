@@ -73,6 +73,13 @@ exports.capturePayment = async (req, res) => {
 }
 
 // verify the payment
+
+//Use Case
+// This snippet is typically used in payment gateway integrations (like Razorpay). Here's how:
+// Razorpay sends a webhook notification containing a payload and a signature.
+// Your server computes the expectedSignature using the webhook payload (body) and the secret key (RAZORPAY_SECRET).
+// You then compare the expectedSignature with the signature sent by Razorpay to verify the webhook's authenticity.
+
 exports.verifyPayment = async (req, res) => {
   const razorpay_order_id = req.body?.razorpay_order_id
   const razorpay_payment_id = req.body?.razorpay_payment_id
@@ -92,11 +99,16 @@ exports.verifyPayment = async (req, res) => {
   }
 
   let body = razorpay_order_id + "|" + razorpay_payment_id
-
+  
   const expectedSignature = crypto
     .createHmac("sha256", process.env.RAZORPAY_SECRET)
     .update(body.toString())
     .digest("hex")
+    // crypto.createHmac is a method in Node.js's built-in crypto module 
+    // used to create a Hash-based Message Authentication Code (HMAC).
+    // sha256 stands for Secure Hash Algorithm 256-bit. It is a cryptographic hash function that generates 
+    // a fixed-size (256-bit or 32-byte) hash, 
+    // regardless of the size of the input data.
 
   if (expectedSignature === razorpay_signature) {
     await enrollStudents(courses, userId, res)

@@ -13,7 +13,18 @@ exports.auth = async (req, res, next) => {
 			req.cookies.token ||
 			req.body.token ||
 			req.header("Authorization").replace("Bearer ", "");
-
+			//Content-Type: application/json
+            //Authorization: Bearer abc123
+            //This checks for the token in the Authorization header.
+            // The token is usually prefixed with "Bearer " to follow the standard convention.
+            // Example header:
+            
+            // makefile
+            // Copy code
+            // Authorization: Bearer abc123
+            // The replace("Bearer ", "") removes the "Bearer " prefix, leaving only the token itsel
+			//you're extracting the token from the Authorization header of an HTTP request:
+			
 		// If JWT is missing, return 401 Unauthorized response
 		if (!token) {
 			return res.status(401).json({ success: false, message: `Token Missing` });

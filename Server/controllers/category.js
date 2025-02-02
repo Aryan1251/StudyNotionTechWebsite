@@ -80,6 +80,7 @@ exports.categoryPageDetails = async (req, res) => {
     const categoriesExceptSelected = await Category.find({
       _id: { $ne: categoryId },
     })
+    
     let differentCategory = await Category.findOne(
       categoriesExceptSelected[getRandomInt(categoriesExceptSelected.length)]
         ._id
@@ -99,7 +100,7 @@ exports.categoryPageDetails = async (req, res) => {
       .exec()
     const allCourses = allCategories.flatMap((category) => category.courses)
     const mostSellingCourses = allCourses
-      .sort((a, b) => b.sold - a.sold)
+      .sort((a, b) => b.price - a.price)
       .slice(0, 10)
 
     res.status(200).json({

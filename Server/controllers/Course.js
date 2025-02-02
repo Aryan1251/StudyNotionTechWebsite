@@ -1,7 +1,7 @@
 const Course = require("../models/Course")
 const Category = require("../models/Category");
 const Section = require("../models/Section")
-const SubSection = require("../models/Subsection")
+const SubSection = require("../models/SubSection")
 const User = require("../models/User")
 const { uploadImageToCloudinary } = require("../utils/imageUploader")
 const CourseProgress = require("../models/CourseProgress")
@@ -66,7 +66,7 @@ exports.createCourse = async (req, res) => {
       })
     }
 
-    // Check if the tag given is valid
+    // Check if the category given is valid
     const categoryDetails = await Category.findById(category)
     if (!categoryDetails) {
       return res.status(404).json({
@@ -74,6 +74,7 @@ exports.createCourse = async (req, res) => {
         message: "Category Details Not Found",
       })
     }
+    
     // Upload the Thumbnail to Cloudinary
     const thumbnailImage = await uploadImageToCloudinary(
       thumbnail,

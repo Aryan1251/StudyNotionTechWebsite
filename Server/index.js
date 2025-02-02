@@ -23,10 +23,11 @@ const PORT = process.env.PORT || 4000;
 
 // Connecting to database
 database();
- 
+
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
+//cross-origin resource sharing package
 app.use(
 	cors({
 		origin: "*",
